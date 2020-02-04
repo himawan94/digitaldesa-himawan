@@ -124,10 +124,11 @@ class Home extends Administrasi_Controller {
             ));
             $i -= 4;
         }
-
+        //ambil jumlah data jenis kelamin laki-laki dan perempuan
         $count_male = $this->db->where(['id_jenis_kelamin'=>1])->from($this->pdd)->count_all_results();
         $count_female = $this->db->where(['id_jenis_kelamin'=>2])->from($this->pdd)->count_all_results();
 
+        //ambil jumlah tertinggi jenis kelamin laki-laki
         $max_male = 0;
         foreach ($chart['umur'] as $umur) {
             if ($umur['male'] > $max_male) {
@@ -137,6 +138,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        //ambil semua keterangan atau kategori pada jenis kelamin laki-laki yang memilki jumlah tertinggi
         $max_amale =  max(array_column($chart['umur'],'male'));
         $keys_max_amale = array_keys(array_column($chart['umur'],'male'), $max_amale);
         $max_amale_arrays = [];
@@ -150,6 +152,7 @@ class Home extends Administrasi_Controller {
             $max_amale_labels[] = $max_amale_array['label'];
         }
 
+        //ambil jumlah terendah jenis kelamin laki-laki
         $min_male = PHP_INT_MAX;
         foreach ($chart['umur'] as $umur) {
             if ($umur['male'] < $min_male) {
@@ -159,6 +162,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        //ambil semua keterangan atau kategori pada jenis kelamin laki-laki yang memilki jumlah terendah
         $min_amale =  min(array_column($chart['umur'],'male'));
         $keys_min_amale = array_keys(array_column($chart['umur'],'male'), $min_amale);
         $min_amale_arrays = [];
@@ -172,6 +176,7 @@ class Home extends Administrasi_Controller {
             $min_amale_labels[] = $min_amale_array['label'];
         }
 
+        //ambil jumlah tertinggi jenis kelamin perempuan
         $max_female = 0;
         foreach ($chart['umur'] as $umur) {
             if ($umur['female'] > $max_female) {
@@ -181,6 +186,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        //ambil semua keterangan atau kategori pada jenis kelamin perempuan yang memilki jumlah tertinggi
         $max_afemale =  max(array_column($chart['umur'],'female'));
         $keys_max_afemale = array_keys(array_column($chart['umur'],'female'), $max_afemale);
         $max_afemale_arrays = [];
@@ -194,6 +200,7 @@ class Home extends Administrasi_Controller {
             $max_afemale_labels[] = $max_afemale_array['label'];
         }
 
+        //ambil jumlah terendah jenis kelamin perempuan
         $min_female = PHP_INT_MAX;
         foreach ($chart['umur'] as $umur) {
             if ($umur['male'] < $min_female) {
@@ -203,6 +210,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        //ambil semua keterangan atau kategori pada jenis kelamin perempuan yang memilki jumlah terendah
         $min_afemale =  min(array_column($chart['umur'],'female'));
         $keys_min_afemale = array_keys(array_column($chart['umur'],'female'), $min_afemale);
         $min_afemale_arrays = [];
