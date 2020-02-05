@@ -650,13 +650,13 @@ class Home extends Administrasi_Controller {
             }
         }
 
-        $max_lmale =  max(array_column($chart['pekerjaan'],'male'));
-        $keys_max_lmale = array_keys(array_column($chart['pekerjaan'],'male'), $max_lmale);
+        $max_lmale =  max(array_column($chart['status_perkawinan'],'male'));
+        $keys_max_lmale = array_keys(array_column($chart['status_perkawinan'],'male'), $max_lmale);
         $max_lmale_arrays = [];
         foreach($keys_max_lmale as $key_max_lmale){
             $max_lmale_arrays[] = array(
-                'label' => $chart['pekerjaan'][$key_max_lmale]['label'],
-                'male' => $chart['pekerjaan'][$key_max_lmale]['male']
+                'label' => $chart['status_perkawinan'][$key_max_lmale]['label'],
+                'male' => $chart['status_perkawinan'][$key_max_lmale]['male']
             );
         }
         foreach ($max_lmale_arrays as $max_lmale_array) {
