@@ -109,6 +109,8 @@ class Home extends Administrasi_Controller {
     }
 
     public function get_information_age() {
+        $checkQuery = $this->db->select('*')->get($this->pdd)->num_rows();
+
         $chart['umur'] = array();
         $i = 85;
         array_push($chart['umur'], array(
@@ -158,7 +160,12 @@ class Home extends Administrasi_Controller {
             if ($umur['male'] < $min_male) {
                 $min_male = $umur['male'];
                 $min_male_label = $umur['label'];
-                $count_min_male_percent = $min_male / $count_male * 100;
+                if ($min_male != 0){
+                    $count_min_male_percent = $min_male / $count_female * 100;
+                }
+                else {
+                    $count_min_male_percent = 0;
+                }
             }
         }
 
@@ -206,7 +213,12 @@ class Home extends Administrasi_Controller {
             if ($umur['male'] < $min_female) {
                 $min_female = $umur['male'];
                 $min_female_label = $umur['label'];
-                $count_min_female_percent = $min_female / $count_female * 100;
+                if ($min_female != 0){
+                    $count_min_female_percent = $min_female / $count_female * 100;
+                }
+                else {
+                    $count_min_female_percent = 0;
+                }
             }
         }
 
@@ -225,6 +237,7 @@ class Home extends Administrasi_Controller {
         }
 
         $information_age = array(
+            'checkQuery' => $checkQuery,
             'max_male' => $max_male,
             'max_male_label' => $max_male_label,
             'count_max_male_percent' => $count_max_male_percent,
@@ -288,7 +301,12 @@ class Home extends Administrasi_Controller {
             if ($dusun['male'] < $vmin_male) {
                 $vmin_male = $dusun['male'];
                 $vmin_male_label = $dusun['label'];
-                $vcount_vmin_male_percent = $vmin_male / $count_male * 100;
+                if ($vmin_male != 0){
+                    $vcount_vmin_male_percent = $vmin_male / $count_female * 100;
+                }
+                else {
+                    $vcount_vmin_male_percent = 0;
+                }
             }
         }
 
@@ -332,7 +350,12 @@ class Home extends Administrasi_Controller {
             if ($dusun['male'] < $vmin_female) {
                 $vmin_female = $dusun['female'];
                 $vmin_female_label = $dusun['label'];
-                $vcount_vmin_female_percent = $vmin_female / $count_female * 100;
+                if ($vmin_female != 0){
+                    $vcount_vmin_female_percent = $vmin_female / $count_female * 100;
+                }
+                else {
+                    $vcount_vmin_female_percent = 0;
+                }
             }
         }
 
@@ -413,7 +436,12 @@ class Home extends Administrasi_Controller {
             if ($pendidikan_terakhir['male'] < $emin_male) {
                 $emin_male = $pendidikan_terakhir['male'];
                 $emin_male_label = $pendidikan_terakhir['label'];
-                $ecount_emin_male_percent = $emin_male / $count_male * 100;
+                if ($emin_male != 0){
+                    $ecount_emin_male_percent = $emin_male / $count_female * 100;
+                }
+                else {
+                    $ecount_emin_male_percent = 0;
+                }
             }
         }
 
@@ -457,7 +485,12 @@ class Home extends Administrasi_Controller {
             if ($pendidikan_terakhir['female'] < $emin_female) {
                 $emin_female = $pendidikan_terakhir['female'];
                 $emin_female_label = $pendidikan_terakhir['label'];
-                $ecount_emin_female_percent = $emin_female / $count_female * 100;
+                if ($emin_female != 0){
+                    $ecount_emin_female_percent = $emin_female / $count_female * 100;
+                }
+                else {
+                    $ecount_emin_female_percent = 0;
+                }
             }
         }
 
@@ -525,7 +558,9 @@ class Home extends Administrasi_Controller {
             }
         }
 
-        $max_omale =  max(array_column($chart['pekerjaan'],'male'));
+        if (!empty($chart['pekerjaan'])){
+            $max_omale =  max(array_column($chart['pekerjaan'],'male'));
+        }
         $keys_max_omale = array_keys(array_column($chart['pekerjaan'],'male'), $max_omale);
         $max_omale_arrays = [];
         foreach($keys_max_omale as $key_max_omale){
@@ -543,11 +578,18 @@ class Home extends Administrasi_Controller {
             if ($pekerjaan['male'] < $omin_male) {
                 $omin_male = $pekerjaan['male'];
                 $omin_male_label = $pekerjaan['label'];
-                $ocount_omin_male_percent = $omin_male / $count_male * 100;
+                if ($omin_male != 0){
+                    $ocount_omin_male_percent = $omin_male / $count_female * 100;
+                }
+                else {
+                    $ocount_omin_male_percent = 0;
+                }
             }
         }
 
-        $min_omale =  min(array_column($chart['pekerjaan'],'male'));
+        if (!empty($chart['pekerjaan'])){
+            $min_omale =  min(array_column($chart['pekerjaan'],'male'));
+        }
         $keys_min_omale = array_keys(array_column($chart['pekerjaan'],'male'), $min_omale);
         $min_omale_arrays = [];
         foreach($keys_min_omale as $key_min_omale){
@@ -569,7 +611,9 @@ class Home extends Administrasi_Controller {
             }
         }
 
-        $max_ofemale =  max(array_column($chart['pekerjaan'],'female'));
+        if (!empty($chart['pekerjaan'])){
+            $max_ofemale =  max(array_column($chart['pekerjaan'],'female'));
+        }
         $keys_max_ofemale = array_keys(array_column($chart['pekerjaan'],'female'), $max_ofemale);
         $max_ofemale_arrays = [];
         foreach($keys_max_ofemale as $key_max_ofemale){
@@ -587,11 +631,18 @@ class Home extends Administrasi_Controller {
             if ($pekerjaan['female'] < $omin_female) {
                 $omin_female = $pekerjaan['female'];
                 $omin_female_label = $pekerjaan['label'];
-                $ocount_omin_female_percent = $omin_female / $count_female * 100;
+                if ($omin_female != 0){
+                    $ocount_omin_female_percent = $omin_female / $count_female * 100;
+                }
+                else {
+                    $ocount_omin_female_percent = 0;
+                }
             }
         }
 
-        $min_ofemale =  min(array_column($chart['pekerjaan'],'female'));
+        if (!empty($chart['pekerjaan'])){
+            $min_ofemale =  min(array_column($chart['pekerjaan'],'female'));
+        }
         $keys_min_ofemale = array_keys(array_column($chart['pekerjaan'],'female'), $min_ofemale);
         $min_ofemale_arrays = [];
         foreach($keys_min_ofemale as $key_min_ofemale){
@@ -668,7 +719,12 @@ class Home extends Administrasi_Controller {
             if ($status_perkawinan['male'] < $lmin_male) {
                 $lmin_male = $status_perkawinan['male'];
                 $lmin_male_label = $status_perkawinan['label'];
-                $lcount_lmin_male_percent = $lmin_male / $count_male * 100;
+                if ($lmin_male != 0){
+                    $lcount_lmin_male_percent = $lmin_male / $count_female * 100;
+                }
+                else {
+                    $lcount_lmin_male_percent = 0;
+                }
             }
         }
 
@@ -712,7 +768,12 @@ class Home extends Administrasi_Controller {
             if ($status_perkawinan['female'] < $lmin_female) {
                 $lmin_female = $status_perkawinan['female'];
                 $lmin_female_label = $status_perkawinan['label'];
-                $lcount_lmin_female_percent = $lmin_female / $count_female * 100;
+                if ($lmin_female != 0){
+                    $lcount_lmin_female_percent = $lmin_female / $count_female * 100;
+                }
+                else {
+                    $lcount_lmin_female_percent = 0;
+                }
             }
         }
 
@@ -793,7 +854,12 @@ class Home extends Administrasi_Controller {
             if ($agama['male'] < $rmin_male) {
                 $rmin_male = $agama['male'];
                 $rmin_male_label = $agama['label'];
-                $rcount_rmin_male_percent = $rmin_male / $count_male * 100;
+                if ($rmin_male != 0){
+                    $rcount_rmin_male_percent = $rmin_male / $count_female * 100;
+                }
+                else {
+                    $rcount_rmin_male_percent = 0;
+                }
             }
         }
 
@@ -837,7 +903,12 @@ class Home extends Administrasi_Controller {
             if ($agama['female'] < $rmin_female) {
                 $rmin_female = $agama['female'];
                 $rmin_female_label = $agama['label'];
-                $rcount_rmin_female_percent = $rmin_female / $count_female * 100;
+                if ($rmin_female != 0){
+                    $rcount_rmin_female_percent = $rmin_female / $count_female * 100;
+                }
+                else {
+                    $rcount_rmin_female_percent = 0;
+                }
             }
         }
 
