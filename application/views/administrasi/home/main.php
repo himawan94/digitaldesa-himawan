@@ -46,6 +46,7 @@
                                         <div class="tab-pane active" id="tab-umur" role="tabpanel">
                                             <br/>
                                             <div class="m-loader m-loader--danger m-loader--lg" style="width: 50px;"></div>
+                                            <?php if($information_age['checkQuery'] != 0) {?>
                                             <div class="row col-12">
                                                 <div class="col-8">
                                                     <div class="chart" id="chart_umur"></div>
@@ -59,10 +60,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-info">
+                                                    Belum Ada Data Penduduk
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="tab-pane" id="tab-dusun" role="tabpanel">
                                             <br/>
                                             <div class="m-loader m-loader--danger m-loader--lg" style="width: 50px;"></div>
+                                            <?php if($information_age['checkQuery'] != 0) {?>
                                             <div class="row col-12">
                                                 <div class="col-8">
                                                     <div class="chart" id="chart_dusun"></div>
@@ -76,10 +83,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-info">
+                                                    Belum Ada Data Penduduk
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="tab-pane" id="tab-pendidikan_terakhir" role="tabpanel">
                                             <br/>
                                             <div class="m-loader m-loader--danger m-loader--lg" style="width: 50px;"></div>
+                                            <?php if($information_age['checkQuery'] != 0) {?>
                                             <div class="row col-12">
                                                 <div class="col-8">
                                                     <div class="chart" id="chart_pendidikan_terakhir"></div>
@@ -93,10 +106,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-info">
+                                                    Belum Ada Data Penduduk
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="tab-pane" id="tab-pekerjaan" role="tabpanel">
                                             <br/>
                                             <div class="m-loader m-loader--danger m-loader--lg" style="width: 50px;"></div>
+                                            <?php if($information_age['checkQuery'] != 0) {?>
                                             <div class="row col-12">
                                                 <div class="col-8">
                                                     <div class="chart" id="chart_pekerjaan"></div>
@@ -110,10 +129,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-info">
+                                                    Belum Ada Data Penduduk
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="tab-pane" id="tab-status_perkawinan" role="tabpanel">
                                             <br/>
                                             <div class="m-loader m-loader--danger m-loader--lg" style="width: 50px;"></div>
+                                            <?php if($information_age['checkQuery'] != 0) {?>
                                             <div class="row col-12">
                                                 <div class="col-8">
                                                     <div class="chart" id="chart_status_perkawinan"></div>
@@ -127,10 +152,16 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-info">
+                                                    Belum Ada Data Penduduk
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="tab-pane" id="tab-agama" role="tabpanel">
                                             <br/>
                                             <div class="m-loader m-loader--danger m-loader--lg" style="width: 50px;"></div>
+                                            <?php if($information_age['checkQuery'] != 0) {?>
                                             <div class="row col-12">
                                                 <div class="col-8">
                                                     <div class="chart" id="chart_agama"></div>
@@ -144,6 +175,11 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <?php } else { ?>
+                                                <div class="alert alert-info">
+                                                    Belum Ada Data Penduduk
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
