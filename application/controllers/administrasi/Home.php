@@ -132,6 +132,8 @@ class Home extends Administrasi_Controller {
 
         //ambil jumlah tertinggi jenis kelamin laki-laki
         $max_male = 0;
+        $max_male_label = [];
+        $count_max_male_percent = 0;
         foreach ($chart['umur'] as $umur) {
             if ($umur['male'] > $max_male) {
                 $max_male = $umur['male'];
@@ -185,6 +187,8 @@ class Home extends Administrasi_Controller {
 
         //ambil jumlah tertinggi jenis kelamin perempuan
         $max_female = 0;
+        $max_female_label = [];
+        $count_max_female_percent = 0;
         foreach ($chart['umur'] as $umur) {
             if ($umur['female'] > $max_female) {
                 $max_female = $umur['female'];
@@ -275,6 +279,8 @@ class Home extends Administrasi_Controller {
         $count_female = $this->db->where(['id_jenis_kelamin'=>2])->from($this->pdd)->count_all_results();
 
         $vmax_male = 0;
+        $vmax_male_label = [];
+        $vcount_vmax_male_percent = 0;
         foreach ($chart['dusun'] as $dusun) {
             if ($dusun['male'] > $vmax_male) {
                 $vmax_male = $dusun['male'];
@@ -324,6 +330,8 @@ class Home extends Administrasi_Controller {
         }
 
         $vmax_female = 0;
+        $vmax_female_label = [];
+        $vcount_vmax_female_percent = 0;
         foreach ($chart['dusun'] as $dusun) {
             if ($dusun['female'] > $vmax_female) {
                 $vmax_female = $dusun['female'];
@@ -410,6 +418,8 @@ class Home extends Administrasi_Controller {
         $count_female = $this->db->where(['id_jenis_kelamin'=>2])->from($this->pdd)->count_all_results();
 
         $emax_male = 0;
+        $emax_male_label = [];
+        $ecount_emax_male_percent = 0;
         foreach ($chart['pendidikan_terakhir'] as $pendidikan_terakhir) {
             if ($pendidikan_terakhir['male'] > $emax_male) {
                 $emax_male = $pendidikan_terakhir['male'];
@@ -459,6 +469,8 @@ class Home extends Administrasi_Controller {
         }
 
         $emax_female = 0;
+        $emax_female_label = [];
+        $ecount_emax_female_percent = 0;
         foreach ($chart['pendidikan_terakhir'] as $pendidikan_terakhir) {
             if ($pendidikan_terakhir['female'] > $emax_female) {
                 $emax_female = $pendidikan_terakhir['female'];
@@ -550,6 +562,8 @@ class Home extends Administrasi_Controller {
         $count_female = $this->db->where(['id_jenis_kelamin'=>2])->from($this->pdd)->count_all_results();
 
         $omax_male = 0;
+        $omax_male_label = [];
+        $ocount_omax_male_percent = 0;
         foreach ($chart['pekerjaan'] as $pekerjaan) {
             if ($pekerjaan['male'] > $omax_male) {
                 $omax_male = $pekerjaan['male'];
@@ -558,6 +572,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        $max_omale = [];
         if (!empty($chart['pekerjaan'])){
             $max_omale =  max(array_column($chart['pekerjaan'],'male'));
         }
@@ -569,11 +584,14 @@ class Home extends Administrasi_Controller {
                 'male' => $chart['pekerjaan'][$key_max_omale]['male']
             );
         }
+        $max_omale_labels =[];
         foreach ($max_omale_arrays as $max_omale_array) {
             $max_omale_labels[] = $max_omale_array['label'];
         }
 
         $omin_male = PHP_INT_MAX;
+        $omin_male_label = [];
+        $ocount_omin_male_percent = 0;
         foreach ($chart['pekerjaan'] as $pekerjaan) {
             if ($pekerjaan['male'] < $omin_male) {
                 $omin_male = $pekerjaan['male'];
@@ -587,6 +605,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        $min_omale = [];
         if (!empty($chart['pekerjaan'])){
             $min_omale =  min(array_column($chart['pekerjaan'],'male'));
         }
@@ -598,11 +617,14 @@ class Home extends Administrasi_Controller {
                 'male' => $chart['pekerjaan'][$key_min_omale]['male']
             );
         }
+        $min_omale_labels = [];
         foreach ($min_omale_arrays as $min_omale_array) {
             $min_omale_labels[] = $min_omale_array['label'];
         }
 
         $omax_female = 0;
+        $omax_female_label = [];
+        $ocount_omax_female_percent = 0;
         foreach ($chart['pekerjaan'] as $pekerjaan) {
             if ($pekerjaan['female'] > $omax_female) {
                 $omax_female = $pekerjaan['female'];
@@ -611,6 +633,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        $max_ofemale =[];
         if (!empty($chart['pekerjaan'])){
             $max_ofemale =  max(array_column($chart['pekerjaan'],'female'));
         }
@@ -622,11 +645,14 @@ class Home extends Administrasi_Controller {
                 'female' => $chart['pekerjaan'][$key_max_ofemale]['female']
             );
         }
+        $max_ofemale_labels = [];
         foreach ($max_ofemale_arrays as $max_ofemale_array) {
             $max_ofemale_labels[] = $max_ofemale_array['label'];
         }
 
         $omin_female = PHP_INT_MAX;
+        $omin_female_label = [];
+        $ocount_omin_female_percent = 0;
         foreach ($chart['pekerjaan'] as $pekerjaan) {
             if ($pekerjaan['female'] < $omin_female) {
                 $omin_female = $pekerjaan['female'];
@@ -640,6 +666,7 @@ class Home extends Administrasi_Controller {
             }
         }
 
+        $min_ofemale = [];
         if (!empty($chart['pekerjaan'])){
             $min_ofemale =  min(array_column($chart['pekerjaan'],'female'));
         }
@@ -651,6 +678,7 @@ class Home extends Administrasi_Controller {
                 'female' => $chart['pekerjaan'][$key_min_ofemale]['female']
             );
         }
+        $min_ofemale_labels = [];
         foreach ($min_ofemale_arrays as $min_ofemale_array) {
             $min_ofemale_labels[] = $min_ofemale_array['label'];
         }
@@ -693,6 +721,8 @@ class Home extends Administrasi_Controller {
         $count_female = $this->db->where(['id_jenis_kelamin'=>2])->from($this->pdd)->count_all_results();
 
         $lmax_male = 0;
+        $lmax_male_label = [];
+        $lcount_lmax_male_percent = 0;
         foreach ($chart['status_perkawinan'] as $status_perkawinan) {
             if ($status_perkawinan['male'] > $lmax_male) {
                 $lmax_male = $status_perkawinan['male'];
@@ -742,6 +772,8 @@ class Home extends Administrasi_Controller {
         }
 
         $lmax_female = 0;
+        $lmax_female_label = [];
+        $lcount_lmax_female_percent = 0;
         foreach ($chart['status_perkawinan'] as $status_perkawinan) {
             if ($status_perkawinan['female'] > $lmax_female) {
                 $lmax_female = $status_perkawinan['female'];
@@ -828,6 +860,8 @@ class Home extends Administrasi_Controller {
         $count_female = $this->db->where(['id_jenis_kelamin'=>2])->from($this->pdd)->count_all_results();
 
         $rmax_male = 0;
+        $rmax_male_label = [];
+        $rcount_rmax_male_percent = 0;
         foreach ($chart['agama'] as $agama) {
             if ($agama['male'] > $rmax_male) {
                 $rmax_male = $agama['male'];
@@ -877,6 +911,8 @@ class Home extends Administrasi_Controller {
         }
 
         $rmax_female = 0;
+        $rmax_female_label = [];
+        $rcount_rmax_female_percent = 0;
         foreach ($chart['agama'] as $agama) {
             if ($agama['female'] > $rmax_female) {
                 $rmax_female = $agama['female'];
